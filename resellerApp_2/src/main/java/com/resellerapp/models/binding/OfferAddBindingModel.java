@@ -11,9 +11,11 @@ public class OfferAddBindingModel {
     @Size(min = 2,max = 50, message = "Description length must be between 2 and 50 characters!")
     @NotNull
     private String description;
+    
     @Positive(message = "Price must be positive number!")
     @NotNull
     private Double price;
+    
     @NotNull(message = "You must select a condition!")
     private ConditionEnum condition;
 

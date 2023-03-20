@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface ConditionRepository extends JpaRepository<Condition, UUID> {
+public interface ConditionRepository extends JpaRepository<Condition, String> {
 
     Optional<Condition> findByName(ConditionEnum name);
 }

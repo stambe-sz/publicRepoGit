@@ -9,12 +9,15 @@ public class UserRegisterBindingModel {
 
     @Size(min = 3, max = 20,message = "Username length must be between 3 and 20 characters!")
     private String username;
+    
     @Email(message = "Please enter valid email!")
     @NotBlank(message = "Email cannot be empty!")
     private String email;
     @NotNull
+    
     @Size(min = 3, max = 20, message = "Password length must be between 3 and 20 characters!")
     private String password;
+    
     @NotBlank(message = "")
     @Size(min = 3, max = 20, message = "")
     private String confirmPassword;
