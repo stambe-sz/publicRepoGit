@@ -65,8 +65,11 @@ public class UserController {
     @PostMapping("/login")
     public String loginConfirm(@Valid UserLoginBindingModel userLoginBindingModel,
                                BindingResult bindingResult,
-                               RedirectAttributes redirectAttributes) {
+                               RedirectAttributes redirectAttributes,
+                               HttpSession httpSession) {
 
+    	System.out.println("STOP");
+    	
         if (bindingResult.hasErrors()) {
 
             redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
@@ -74,8 +77,7 @@ public class UserController {
 
             return "redirect:login";
         }
-        UserServiceModel userServiceModel = userService
-                .findByUsernameAndPassword(userLoginBindingModel.getUsername()
+        UserServiceModel userServiceModel = userService.findByUsernameAndPassword(userLoginBindingModel.getUsername()
                         ,userLoginBindingModel.getPassword());
 
         if (userServiceModel == null){
@@ -86,7 +88,7 @@ public class UserController {
             return "redirect:login";
         }
 
-        userService.loginUser(userServiceModel.getId(),userLoginBindingModel.getUsername());
+        userService.loginUser(userServiceModel.getId(),userLoginBindingModel.getUsername(), httpSession);
 
 
             return "redirect:/";
@@ -95,7 +97,6 @@ public class UserController {
     @GetMapping("logout")
     public String logout(HttpSession httpSession){
         httpSession.invalidate();
-
         return "redirect:/";
     }
 

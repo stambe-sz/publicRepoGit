@@ -8,13 +8,16 @@ public class Offer extends BaseEntity{
 
     @Column(nullable = false)
     private String description;
+    
     @Column(nullable = false)
     private Double price;
+    
     @ManyToOne
     private Condition condition;
 
     @ManyToOne
     private User user;
+    
     @ManyToOne
     private User buyer;
 

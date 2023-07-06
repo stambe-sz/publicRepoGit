@@ -11,6 +11,7 @@ public class Condition extends BaseEntity{
     @Enumerated(EnumType.STRING)
     @Column(unique = true,nullable = false)
     private ConditionEnum name;
+    
     @Column(nullable = false)
     private String description;
 
