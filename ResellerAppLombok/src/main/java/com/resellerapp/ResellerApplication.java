@@ -1,13 +1,12 @@
-package com.example.resellerapplombok;
+package com.resellerapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ResellerAppLombokApplication {
+public class ResellerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ResellerAppLombokApplication.class, args);
+        SpringApplication.run(ResellerApplication.class, args);
     }
-
 }

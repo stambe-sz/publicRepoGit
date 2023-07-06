@@ -1,10 +1,10 @@
-package com.example.resellerapplombok;
+package com.resellerapp;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ResellerAppLombokApplicationTests {
+class ResellerApplicationTests {
 
     @Test
     void contextLoads() {
