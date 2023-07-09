@@ -18,13 +18,11 @@ public class User extends BaseEntity{
     private String username;
     @Column(nullable = false)
     private String password;
-    @Email
     @Column(nullable = false, unique = true)
     private String email;
-
-    @OneToMany(fetch = FetchType.EAGER,mappedBy = "user")
+    @OneToMany(fetch = FetchType.EAGER, targetEntity = Offer.class, mappedBy = "user")
     private Set<Offer> offers;
 
-    @OneToMany(fetch = FetchType.EAGER,mappedBy = "buyer")
+    @OneToMany(fetch = FetchType.EAGER,targetEntity = Offer.class ,mappedBy = "buyer")
     private Set<Offer> boughtOffers;
 }
