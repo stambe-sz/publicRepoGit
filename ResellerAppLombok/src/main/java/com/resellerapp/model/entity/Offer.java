@@ -19,9 +19,11 @@ public class Offer extends BaseEntity{
     @Column(nullable = false, columnDefinition = "FOAL")
     private Double price;
 
-    @ManyToOne
+    @ManyToOne()
     private Condition condition;
     @ManyToOne
     private User user;
+    @ManyToOne
+    private User buyer;
 
 }
