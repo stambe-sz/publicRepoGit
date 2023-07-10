@@ -14,4 +14,8 @@ public class ConditionService {
         this.conditionRepository = conditionRepository;
         this.modelMapper = modelMapper;
     }
+
+    public void initConditions() {
+        
+    }
 }
