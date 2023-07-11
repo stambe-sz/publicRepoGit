@@ -1,5 +1,5 @@
 package com.resellerapp.model.enums;
 
-public enum ConditionName {
+public enum ConditionNameEnum {
     EXCELLENT, GOOD, ACCEPTABLE
 }

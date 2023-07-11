@@ -1,6 +1,6 @@
 package com.resellerapp.init;
 
-import com.resellerapp.model.enums.ConditionService;
+import com.resellerapp.service.ConditionService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 

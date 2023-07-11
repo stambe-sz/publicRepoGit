@@ -1,4 +1,4 @@
-package com.resellerapp.model.enums;
+package com.resellerapp.service;
 
 import com.resellerapp.repository.ConditionRepository;
 import org.modelmapper.ModelMapper;
@@ -16,6 +16,9 @@ public class ConditionService {
     }
 
     public void initConditions() {
+        if(conditionRepository.count() != 0){
+            return;
+        }
         
     }
 }
