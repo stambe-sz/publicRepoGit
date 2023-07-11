@@ -22,7 +22,21 @@ public class UserController {
     @PostMapping("/register")
     public String registerConfirm(@Valid UserRegisterBindingModel userRegisterBindingModel,
                                   BindingResult bindingResult, RedirectAttributes redirectAttributes){
-        
+        if (bindingResult.hasErrors() ||
+                !userRegisterBindingModel.getPassword()
+                        .equals(userRegisterBindingModel.getConfirmPassword())){
+
+            redirectAttributes.addFlashAttribute
+                    ("userRegisterBindingModel", userRegisterBindingModel);
+            redirectAttributes
+                    .addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel",bindingResult);
+
+
+            return "redirect:register";
+        }
+        //todo save to db
+
+        return "redirect:login";
 
     }
 }
