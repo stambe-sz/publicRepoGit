@@ -1,5 +1,6 @@
 package com.resellerapp.controller;
 
+import com.resellerapp.model.binding.UserLoginBindingModel;
 import com.resellerapp.model.binding.UserRegisterBindingModel;
 import com.resellerapp.model.service.UserServiceModel;
 import com.resellerapp.service.UserService;
@@ -55,6 +56,20 @@ public class UserController {
     @GetMapping("/login")
     public String login(){
         return "login";
+    }
+
+    @PostMapping("/login")
+    public String loginConfirm(UserLoginBindingModel userLoginBindingModel,
+                               BindingResult bindingResult,RedirectAttributes redirectAttributes){
+        if(bindingResult.hasErrors()){
+            redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
+            redirectAttributes
+                    .addFlashAttribute("org.springframework.validation.BindingResult.userLoginBindingModel",bindingResult);
+
+            return "redirect:login";
+        }
+
+        
     }
 
     @ModelAttribute
