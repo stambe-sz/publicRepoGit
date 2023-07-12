@@ -17,7 +17,9 @@ public class UserService {
         this.modelMapper = modelMapper;
     }
 
-    public User registerUser(UserServiceModel userServiceModel) {
+    public UserServiceModel registerUser(UserServiceModel userServiceModel) {
 
+        User user = modelMapper.map(userServiceModel,User.class);
+        return modelMapper.map(userRepository.save(user), UserServiceModel.class);
     }
 }
