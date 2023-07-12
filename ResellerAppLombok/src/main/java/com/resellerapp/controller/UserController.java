@@ -1,6 +1,9 @@
 package com.resellerapp.controller;
 
 import com.resellerapp.model.binding.UserRegisterBindingModel;
+import com.resellerapp.model.service.UserServiceModel;
+import com.resellerapp.service.UserService;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +17,13 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/users")
 public class UserController {
+    private final UserService userService;
+    private final ModelMapper modelMapper;
+
+    public UserController(UserService userService, ModelMapper modelMapper) {
+        this.userService = userService;
+        this.modelMapper = modelMapper;
+    }
 
     @GetMapping("/register")
     public String register(){
@@ -35,7 +45,8 @@ public class UserController {
 
             return "redirect:register";
         }
-        //todo save to db
+        userService.registerUser(modelMapper
+                .map(userRegisterBindingModel, UserServiceModel.class));
 
         return "redirect:login";
 
