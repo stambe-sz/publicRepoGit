@@ -6,15 +6,19 @@ import com.resellerapp.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
+
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
+    private final HttpSession httpSession;
 
-    public UserService(UserRepository userRepository, ModelMapper modelMapper) {
+    public UserService(UserRepository userRepository, ModelMapper modelMapper, HttpSession httpSession) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
+        this.httpSession = httpSession;
     }
 
     public UserServiceModel registerUser(UserServiceModel userServiceModel) {
@@ -27,5 +31,10 @@ public class UserService {
         return userRepository.findByUsernameAndPassword(username,password)
                 .map(user -> modelMapper.map(user, UserServiceModel.class))
                 .orElse(null);
+    }
+
+    public void loginUser(Long id, String username, HttpSession httpSession) {
+        httpSession.setAttribute("id", id);
+        httpSession.setAttribute("username", username);
     }
 }
