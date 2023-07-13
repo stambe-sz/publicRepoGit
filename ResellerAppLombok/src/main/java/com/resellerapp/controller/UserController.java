@@ -27,21 +27,21 @@ public class UserController {
     }
 
     @GetMapping("/register")
-    public String register(){
+    public String register() {
         return "register";
     }
 
     @PostMapping("/register")
     public String registerConfirm(@Valid UserRegisterBindingModel userRegisterBindingModel,
-                                  BindingResult bindingResult, RedirectAttributes redirectAttributes){
+                                  BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors() ||
                 !userRegisterBindingModel.getPassword()
-                        .equals(userRegisterBindingModel.getConfirmPassword())){
+                        .equals(userRegisterBindingModel.getConfirmPassword())) {
 
             redirectAttributes.addFlashAttribute
                     ("userRegisterBindingModel", userRegisterBindingModel);
             redirectAttributes
-                    .addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel",bindingResult);
+                    .addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel", bindingResult);
 
 
             return "redirect:register";
@@ -54,26 +54,33 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String login(){
+    public String login() {
         return "login";
     }
 
     @PostMapping("/login")
     public String loginConfirm(UserLoginBindingModel userLoginBindingModel,
-                               BindingResult bindingResult,RedirectAttributes redirectAttributes){
-        if(bindingResult.hasErrors()){
+                               BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
             redirectAttributes
-                    .addFlashAttribute("org.springframework.validation.BindingResult.userLoginBindingModel",bindingResult);
+                    .addFlashAttribute("org.springframework.validation.BindingResult.userLoginBindingModel", bindingResult);
 
             return "redirect:login";
         }
+        UserServiceModel userServiceModel = userService
+                .findUserByUsernameAndPassword(userLoginBindingModel
+                        .getUsername(), userRegisterBindingModel().getPassword());
 
-        
+        //todo not found
+
+        //todo login user
+
+        return "redirect:/";
     }
 
     @ModelAttribute
-    public UserRegisterBindingModel userRegisterBindingModel(){
+    public UserRegisterBindingModel userRegisterBindingModel() {
         return new UserRegisterBindingModel();
     }
 }
