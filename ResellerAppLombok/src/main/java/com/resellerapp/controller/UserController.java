@@ -79,7 +79,7 @@ public class UserController {
         }
 
         String username = userLoginBindingModel.getUsername();
-        String password = userLoginBindingModel().getPassword();
+        String password = userLoginBindingModel.getPassword();
 
         UserServiceModel userServiceModel = userService
                 .findUserByUsernameAndPassword(username, password);
