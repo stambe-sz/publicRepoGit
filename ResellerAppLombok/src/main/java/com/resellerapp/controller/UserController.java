@@ -66,8 +66,10 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String loginConfirm(UserLoginBindingModel userLoginBindingModel,
-                               BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String loginConfirm(
+            @Valid UserLoginBindingModel userLoginBindingModel,
+            BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
             redirectAttributes
@@ -75,9 +77,12 @@ public class UserController {
 
             return "redirect:login";
         }
+
+        String username = userLoginBindingModel.getUsername();
+        String password = userLoginBindingModel().getPassword();
+
         UserServiceModel userServiceModel = userService
-                .findUserByUsernameAndPassword(userLoginBindingModel
-                        .getUsername(), userRegisterBindingModel().getPassword());
+                .findUserByUsernameAndPassword(username, password);
 
         if (userServiceModel == null) {
             redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);

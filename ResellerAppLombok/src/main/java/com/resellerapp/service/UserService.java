@@ -28,9 +28,15 @@ public class UserService {
     }
 
     public UserServiceModel findUserByUsernameAndPassword(String username, String password) {
-        return userRepository.findByUsernameAndPassword(username,password)
-                .map(user -> modelMapper.map(user, UserServiceModel.class))
+        User foundUser = userRepository
+                .findByUsernameAndPassword(username, password)
                 .orElse(null);
+        if (foundUser == null){
+            return null;
+        }
+        UserServiceModel u =
+                modelMapper.map(foundUser, UserServiceModel.class);
+        return u;
     }
 
     public void loginUser(Long id, String username, HttpSession httpSession) {
