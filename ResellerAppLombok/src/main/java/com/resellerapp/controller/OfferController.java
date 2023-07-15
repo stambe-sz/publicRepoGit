@@ -1,6 +1,7 @@
 package com.resellerapp.controller;
 
 import com.resellerapp.model.binding.OfferAddBindingModel;
+import com.resellerapp.model.service.OfferServiceModel;
 import com.resellerapp.service.OfferService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
@@ -42,7 +43,8 @@ public class OfferController {
             return "redirect:add";
         }
 
-        //add to db
+        offerService.addOffer(modelMapper
+                .map(offerAddBindingModel, OfferServiceModel.class));
 
         return "redirect:/";
     }
