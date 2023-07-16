@@ -28,5 +28,7 @@ public class OfferService {
         Offer offer = modelMapper.map(offerServiceModel,Offer.class);
         offer.setUser(userService.findById((Long) httpSession.getAttribute("id")));
         offer.setCondition(conditionService.findConditionNameEnum(offerServiceModel.getCondition()));
+
+        offerRepository.save(offer);
     }
 }
