@@ -36,4 +36,9 @@ public class ConditionService {
                 });
 
     }
+
+    public Condition findConditionNameEnum(ConditionNameEnum conditionNameEnum) {
+        return conditionRepository.
+                findByConditionName(conditionNameEnum).orElse(null);
+    }
 }
