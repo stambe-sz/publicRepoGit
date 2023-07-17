@@ -35,7 +35,7 @@
                 <option th:each="c : ${T(com.resellerapp.model.enums.ConditionNameEnum).values()}" th:text="${c}" th:value="${c}" value="EXCELLENT">Excellent</option>
             </select>
 
-            <small class="text-danger">Condition error message</small>
+            <small class="invalid-feedback text-danger">Condition error message</small>
         </div>
 
         <div class="button-holder d-flex justify-content-center">

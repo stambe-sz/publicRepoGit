@@ -29,7 +29,10 @@ public class OfferController {
     }
 
     @GetMapping("/add")
-    public String add(){
+    public String add(HttpSession httpSession){
+        if (httpSession.getAttribute("id") == null){
+            return "login";
+        }
         return "offer-add";
     }
 

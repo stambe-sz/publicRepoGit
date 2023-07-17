@@ -20,6 +20,6 @@ public class OfferAddBindingModel {
     @NotNull
     @Positive(message = "Price must be positive number!")
     private Double price;
-    @NotBlank(message = "You must select a condition!")
+    @NotNull(message = "You must select a condition!")
     private ConditionNameEnum condition;
 }
