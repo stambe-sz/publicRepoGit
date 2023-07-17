@@ -26,7 +26,10 @@ public class HomeController {
         }
 
         List<UserOfferInfoBindingModel> myOffers = offerService.findUserOffers(httpSession);
-        model.addAttribute("offers", myOffers);
+        model.addAttribute("myOffers", myOffers);
+
+        List
+
         return "home";
     }
 }
