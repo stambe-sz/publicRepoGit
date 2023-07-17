@@ -15,7 +15,7 @@ public class Condition extends BaseEntity{
 
     @Enumerated(EnumType.STRING)
     @Column(name = "condition_name", nullable = false, unique = true)
-    private ConditionNameEnum conditionName;
+    private ConditionNameEnum name;
     @Column(nullable = false)
     private String description;
 }

@@ -1,5 +1,6 @@
 package com.resellerapp.service;
 
+import com.resellerapp.model.binding.UserOfferInfoBindingModel;
 import com.resellerapp.model.entity.Offer;
 import com.resellerapp.model.service.OfferServiceModel;
 import com.resellerapp.repository.OfferRepository;
@@ -7,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Service
 public class OfferService {
@@ -30,5 +32,10 @@ public class OfferService {
         offer.setCondition(conditionService.findConditionNameEnum(offerServiceModel.getCondition()));
 
         offerRepository.save(offer);
+    }
+
+    public List<UserOfferInfoBindingModel> findUserOffers(HttpSession httpSession) {
+        Long id = (Long) httpSession.getAttribute("id");
+        return offerRepository.findAll();
     }
 }

@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class OfferViewModel {
+    private Long id;
     private String description;
     private Double price;
     private Condition condition;
