@@ -26,7 +26,7 @@ public class ConditionService {
         Arrays.stream(ConditionNameEnum.values())
                 .forEach(conditionNameEnum -> {
                     Condition condition = new Condition();
-                    condition.setConditionName(conditionNameEnum);
+                    condition.setName(conditionNameEnum);
                     switch (conditionNameEnum){
                         case EXCELLENT -> condition.setDescription("In perfect condition");
                         case GOOD -> condition.setDescription("Some signs of wear and tear or minor defects");
@@ -39,6 +39,6 @@ public class ConditionService {
 
     public Condition findConditionNameEnum(ConditionNameEnum conditionNameEnum) {
         return conditionRepository.
-                findByConditionName(conditionNameEnum).orElse(null);
+                findByName(conditionNameEnum).orElse(null);
     }
 }

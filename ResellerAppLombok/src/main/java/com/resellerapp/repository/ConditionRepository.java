@@ -9,5 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface ConditionRepository extends JpaRepository<Condition,Long> {
-    Optional<Condition> findByConditionName(ConditionNameEnum conditionNameEnum);
+    Optional<Condition> findByName(ConditionNameEnum name);
 }

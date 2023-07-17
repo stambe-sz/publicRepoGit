@@ -36,6 +36,6 @@ public class OfferService {
 
     public List<UserOfferInfoBindingModel> findUserOffers(HttpSession httpSession) {
         Long id = (Long) httpSession.getAttribute("id");
-        return offerRepository.findAll();
+        return offerRepository.findAllOffersByUserId(id);
     }
 }
