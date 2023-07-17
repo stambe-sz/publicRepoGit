@@ -1,5 +1,6 @@
 package com.resellerapp.controller;
 
+import com.resellerapp.model.binding.UserBoughtOffersBindingModel;
 import com.resellerapp.model.binding.UserOfferInfoBindingModel;
 import com.resellerapp.service.OfferService;
 import org.springframework.stereotype.Controller;
@@ -28,7 +29,8 @@ public class HomeController {
         List<UserOfferInfoBindingModel> myOffers = offerService.findUserOffers(httpSession);
         model.addAttribute("myOffers", myOffers);
 
-        List
+        List<UserBoughtOffersBindingModel> boughtItems = offerService.findItemsByUserId(httpSession);
+        model.addAttribute("boughtItems", boughtItems);
 
         return "home";
     }
