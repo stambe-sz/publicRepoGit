@@ -1,5 +1,6 @@
 package com.resellerapp.controller;
 
+import com.resellerapp.model.binding.AllOtherOffersBindingModel;
 import com.resellerapp.model.binding.UserBoughtOffersBindingModel;
 import com.resellerapp.model.binding.UserOfferInfoBindingModel;
 import com.resellerapp.service.OfferService;
@@ -31,6 +32,9 @@ public class HomeController {
 
         List<UserBoughtOffersBindingModel> boughtItems = offerService.findItemsByUserId(httpSession);
         model.addAttribute("boughtItems", boughtItems);
+
+        List<AllOtherOffersBindingModel> allOtherOffers = offerService.findAllOtherOffers(httpSession);
+        model.addAttribute("allOtherOffers", allOtherOffers);
 
         return "home";
     }

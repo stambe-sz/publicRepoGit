@@ -1,5 +1,6 @@
 package com.resellerapp.service;
 
+import com.resellerapp.model.binding.AllOtherOffersBindingModel;
 import com.resellerapp.model.binding.UserBoughtOffersBindingModel;
 import com.resellerapp.model.binding.UserOfferInfoBindingModel;
 import com.resellerapp.model.entity.Offer;
@@ -44,5 +45,10 @@ public class OfferService {
         Long id = (Long) httpSession.getAttribute("id");
         return offerRepository.findBoughtItemsByUserId(id);
 
+    }
+
+    public List<AllOtherOffersBindingModel> findAllOtherOffers(HttpSession httpSession) {
+        Long id = (Long) httpSession.getAttribute("id");
+        return offerRepository.findAllOtherOffers(id);
     }
 }

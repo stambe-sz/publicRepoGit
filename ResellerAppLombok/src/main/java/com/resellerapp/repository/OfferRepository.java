@@ -1,5 +1,6 @@
 package com.resellerapp.repository;
 
+import com.resellerapp.model.binding.AllOtherOffersBindingModel;
 import com.resellerapp.model.binding.UserBoughtOffersBindingModel;
 import com.resellerapp.model.binding.UserOfferInfoBindingModel;
 import com.resellerapp.model.entity.Offer;
@@ -17,4 +18,7 @@ public interface OfferRepository extends JpaRepository<Offer,Long> {
 
     @Query("SELECT new com.resellerapp.model.binding.UserBoughtOffersBindingModel(o.id, o.description, o.price) FROM Offer o WHERE o.buyer.id = :id")
     List<UserBoughtOffersBindingModel> findBoughtItemsByUserId(Long id);
+
+    @Query("")
+    List<AllOtherOffersBindingModel> findAllOtherOffers(Long id);
 }
