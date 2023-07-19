@@ -19,6 +19,6 @@ public interface OfferRepository extends JpaRepository<Offer,Long> {
     @Query("SELECT new com.resellerapp.model.binding.UserBoughtOffersBindingModel(o.id, o.description, o.price) FROM Offer o WHERE o.buyer.id = :id")
     List<UserBoughtOffersBindingModel> findBoughtItemsByUserId(Long id);
 
-    @Query("")
+    @Query("SELECT new com.resellerapp.model.binding.AllOtherOffersBindingModel(o.id,o.description,o.price,o.user.username,o.condition.name) FROM Offer o WHERE o.user.id <> :id AND o.buyer.id = null")
     List<AllOtherOffersBindingModel> findAllOtherOffers(Long id);
 }

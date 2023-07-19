@@ -54,17 +54,17 @@
                 <h6 class="mySticky bg-gray text-dark  mb-0 mt-0">{totalOffers}</h6>
                 <div class="bg-dark rounded m-auto" style="height: 67vh; overflow: auto">
                     <div>
-                        <div>
+                        <div th:each="offer: ${allOtherOffers}">
                             <br>
                             <ul class="list-group list-group-horizontal text-dark">
                                 <li class="list-group-item">
                                     <table>
                                         <tr>
                                             <td style="width: 35%">
-                                                <a>{sellersUsername} sells:</a>
+                                                <a th:text="|${offer.sellerUsername} sells:|">{sellersUsername} sells:</a>
                                             </td>
                                             <td>
-                                                <a>{offerDescription}</a>
+                                                <a th:text="|${offer.description}|">{offerDescription}</a>
                                             </td>
                                         </tr>
                                     </table>
@@ -73,10 +73,10 @@
                                     <table>
                                         <tr>
                                             <td style="width: 40%">
-                                                <a>Condition: {offerCondition}</a>
+                                                <a th:text="|Condition: ${offer.condition}|">Condition: {offerCondition}</a>
                                             </td>
                                             <td class="text-primary" style="width: 40%">
-                                                <a>Price: {offerPrice} €</a>
+                                                <a th:text="|Price: ${offer.price} €|">Price: {offerPrice} €</a>
                                             </td>
                                             <td>
                                                 <a class="ml-3 text-danger" href="/">
