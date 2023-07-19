@@ -4,6 +4,7 @@ import com.resellerapp.model.binding.AllOtherOffersBindingModel;
 import com.resellerapp.model.binding.UserBoughtOffersBindingModel;
 import com.resellerapp.model.binding.UserOfferInfoBindingModel;
 import com.resellerapp.model.entity.Offer;
+import com.resellerapp.model.entity.User;
 import com.resellerapp.model.service.OfferServiceModel;
 import com.resellerapp.repository.OfferRepository;
 import org.modelmapper.ModelMapper;
@@ -56,5 +57,19 @@ public class OfferService {
     public void deleteOffer(Long id) {
         Optional<Offer> offer = offerRepository.findById(id);
         offerRepository.delete(offer.get());
+    }
+
+    public void buyOffer(Long id) {
+        Long buyerId = (Long) httpSession.getAttribute("id");
+        Optional<Offer> offer = offerRepository.findById(id);
+        User user = getCurrentUser(buyerId);
+        offer.get().setBuyer(user);
+        offer.get().setUser(null);
+
+
+    }
+
+    private User getCurrentUser(Long buyerId) {
+        return userService.findById(buyerId);
     }
 }

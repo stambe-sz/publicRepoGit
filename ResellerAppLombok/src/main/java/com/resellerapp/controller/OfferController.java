@@ -57,6 +57,12 @@ public class OfferController {
         return "redirect:/";
     }
 
+    @GetMapping("/buy/{id}")
+    public String buyOffer(@PathVariable Long id){
+        offerService.buyOffer(id);
+        return "redirect:/";
+    }
+
     @ModelAttribute
     public OfferAddBindingModel offerAddBindingModel(){
         return new OfferAddBindingModel();
