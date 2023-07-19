@@ -51,4 +51,8 @@ public class OfferService {
         Long id = (Long) httpSession.getAttribute("id");
         return offerRepository.findAllOtherOffers(id);
     }
+
+    public void deleteOffer(Long id) {
+        offerRepository.deleteById(id);
+    }
 }
