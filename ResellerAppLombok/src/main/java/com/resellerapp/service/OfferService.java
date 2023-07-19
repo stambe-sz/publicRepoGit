@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OfferService {
@@ -53,6 +54,7 @@ public class OfferService {
     }
 
     public void deleteOffer(Long id) {
-        offerRepository.deleteById(id);
+        Optional<Offer> offer = offerRepository.findById(id);
+        offerRepository.delete(offer.get());
     }
 }
