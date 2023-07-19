@@ -66,7 +66,7 @@ public class OfferService {
         offer.get().setBuyer(user);
         offer.get().setUser(null);
 
-
+        offerRepository.save(offer.get());
     }
 
     private User getCurrentUser(Long buyerId) {

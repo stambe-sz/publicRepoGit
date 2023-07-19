@@ -79,7 +79,7 @@
                                                 <a th:text="|Price: ${offer.price} €|">Price: {offerPrice} €</a>
                                             </td>
                                             <td>
-                                                <a class="ml-3 text-danger" href="/">
+                                                <a class="ml-3 text-danger" th:href="@{/offers/buy/{id}(id=*{offer.id})}">
                                                     <img src="/img/buy.png" height="35px"></a>
                                             </td>
                                         </tr>
