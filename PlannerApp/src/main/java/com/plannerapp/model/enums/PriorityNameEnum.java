@@ -1,5 +1,5 @@
 package com.plannerapp.model.enums;
 
-public enum PriorityName {
+public enum PriorityNameEnum {
     URGENT, IMPORTANT, LOW
 }
