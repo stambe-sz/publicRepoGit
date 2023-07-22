@@ -16,6 +16,7 @@ import java.util.List;
 public class Priority extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false, unique = true)
     private PriorityNameEnum name;
     @Column(nullable = false)
     private String description;
