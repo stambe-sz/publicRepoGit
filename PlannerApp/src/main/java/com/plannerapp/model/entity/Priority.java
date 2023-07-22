@@ -4,7 +4,6 @@ import com.plannerapp.model.enums.PriorityNameEnum;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.scheduling.config.Task;
 
 import javax.persistence.*;
 import java.util.List;
@@ -20,5 +19,6 @@ public class Priority extends BaseEntity {
     private PriorityNameEnum name;
     @Column(nullable = false)
     private String description;
+    @OneToMany(mappedBy = "priority",fetch = FetchType.EAGER)
     private List<Task> tasks;
 }
