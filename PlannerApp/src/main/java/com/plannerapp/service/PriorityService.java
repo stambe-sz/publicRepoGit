@@ -18,6 +18,10 @@ public class PriorityService {
 
 
     public void initPriorities() {
+        if (priorityRepository.count() !=0){
+            return;
+        }
+
         Arrays.stream(PriorityNameEnum.values())
                 .forEach(prior -> {
                     Priority priority = new Priority();
