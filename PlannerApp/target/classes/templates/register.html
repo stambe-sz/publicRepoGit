@@ -20,7 +20,7 @@
             <!--               id="username" name="username"/>-->
             <!--        <small class="invalid-feedback text-danger">Username error message</small>-->
 
-            <input th:field="*{username}" th:errorclass="is-invalid" type="text" class="form-control" id="username" name="username"/>
+            <input th:field="*{username}" th:errorclass="'is-invalid alert-danger'" type="text" class="form-control" id="username" name="username"/>
             <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="invalid-feedback text-danger">Username error message</small>
         </div>
 
