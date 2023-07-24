@@ -5,12 +5,14 @@ import com.plannerapp.model.service.UserServiceModel;
 import com.plannerapp.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -19,14 +21,19 @@ public class UserController {
 
     private final UserService userService;
     private final ModelMapper modelMapper;
+    private final HttpSession httpSession;
 
-    public UserController(UserService userService, ModelMapper modelMapper) {
+    public UserController(UserService userService, ModelMapper modelMapper, HttpSession httpSession) {
         this.userService = userService;
         this.modelMapper = modelMapper;
+        this.httpSession = httpSession;
     }
 
     @GetMapping("/register")
     public String register(){
+        if (httpSession.getAttribute("id") != null){
+            return "home";
+        }
         return "register";
     }
 
@@ -39,7 +46,7 @@ public class UserController {
             redirectAttributes.addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel", bindingResult);
 
-            return "register";
+            return "redirect:register";
         }
         userService.registerUser(modelMapper
                 .map(userRegisterBindingModel, UserServiceModel.class));

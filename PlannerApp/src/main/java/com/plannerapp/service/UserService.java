@@ -20,8 +20,8 @@ public class UserService {
         this.httpSession = httpSession;
     }
 
-    public void registerUser(UserServiceModel userServiceModel) {
+    public UserServiceModel registerUser(UserServiceModel userServiceModel) {
         User user = modelMapper.map(userServiceModel,User.class);
-        userRepository.save(user);
+        return modelMapper.map(userRepository.save(user), UserServiceModel.class);
     }
 }
