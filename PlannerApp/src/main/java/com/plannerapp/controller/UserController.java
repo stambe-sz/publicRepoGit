@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
+import javax.swing.plaf.PanelUI;
 import javax.validation.Valid;
 
 @Controller
@@ -43,8 +44,9 @@ public class UserController {
     public String registerConfirm(@Valid UserRegisterBindingModel userRegisterBindingModel,
                                   BindingResult bindingResult,
                                   RedirectAttributes redirectAttributes){
-        if (bindingResult.hasErrors() || !userRegisterBindingModel.getPassword()
-                .equals(userRegisterBindingModel.getConfirmPassword())){
+        boolean matchPass = userRegisterBindingModel.getPassword()
+                .equals(userRegisterBindingModel.getConfirmPassword());
+        if (bindingResult.hasErrors() || !matchPass){
             redirectAttributes.addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel", bindingResult);
 
@@ -63,6 +65,21 @@ public class UserController {
         }
         return "login";
     }
+    @PostMapping("/login")
+    public String loginConfirm(@Valid UserLoginBindingModel userLoginBindingModel,
+                               BindingResult bindingResult,
+                               RedirectAttributes redirectAttributes){
+        if (bindingResult.hasErrors()){
+            redirectAttributes.addFlashAttribute("userLoginBindingModel",userLoginBindingModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userLoginBindingModel", bindingResult);
+
+            return "login";
+        }
+
+        userService.loginUser(user);
+        return "redirect:/";
+    }
+
 
     @ModelAttribute
     public UserRegisterBindingModel userRegisterBindingModel(){
