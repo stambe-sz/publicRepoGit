@@ -21,7 +21,23 @@ public class UserService {
     }
 
     public UserServiceModel registerUser(UserServiceModel userServiceModel) {
-        User user = modelMapper.map(userServiceModel,User.class);
+        User user = modelMapper.map(userServiceModel, User.class);
         return modelMapper.map(userRepository.save(user), UserServiceModel.class);
+    }
+
+    public UserServiceModel findUserByUsernameAndPassword(String username, String password) {
+        User foundUser = this.userRepository.findByUsernameAndPassword(username, password);
+
+        if (foundUser == null) {
+            return null;
+        }
+        UserServiceModel u = modelMapper
+                .map(foundUser, UserServiceModel.class);
+        return u;
+    }
+
+    public void loginUser(Long id, String username, HttpSession httpSession) {
+        httpSession.setAttribute("id",id);
+        httpSession.setAttribute("username",username);
     }
 }

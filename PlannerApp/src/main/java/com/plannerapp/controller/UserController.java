@@ -33,8 +33,8 @@ public class UserController {
     }
 
     @GetMapping("/register")
-    public String register(){
-        if (httpSession.getAttribute("id") != null){
+    public String register() {
+        if (httpSession.getAttribute("id") != null) {
             return "home";
         }
         return "register";
@@ -43,10 +43,10 @@ public class UserController {
     @PostMapping("/register")
     public String registerConfirm(@Valid UserRegisterBindingModel userRegisterBindingModel,
                                   BindingResult bindingResult,
-                                  RedirectAttributes redirectAttributes){
+                                  RedirectAttributes redirectAttributes) {
         boolean matchPass = userRegisterBindingModel.getPassword()
                 .equals(userRegisterBindingModel.getConfirmPassword());
-        if (bindingResult.hasErrors() || !matchPass){
+        if (bindingResult.hasErrors() || !matchPass) {
             redirectAttributes.addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel", bindingResult);
 
@@ -57,36 +57,53 @@ public class UserController {
 
         return "redirect:login";
     }
+
     @GetMapping("/login")
-    public String login(Model model){
-        if (!model.containsAttribute("isFound")){
-            model.addAttribute("isFound",true);
+    public String login(Model model) {
+        if (!model.containsAttribute("isFound")) {
+            model.addAttribute("isFound", true);
 
         }
         return "login";
     }
+
     @PostMapping("/login")
     public String loginConfirm(@Valid UserLoginBindingModel userLoginBindingModel,
                                BindingResult bindingResult,
-                               RedirectAttributes redirectAttributes){
-        if (bindingResult.hasErrors()){
-            redirectAttributes.addFlashAttribute("userLoginBindingModel",userLoginBindingModel);
+                               RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userLoginBindingModel", bindingResult);
 
             return "login";
         }
+        UserServiceModel userServiceModel = userService.
+                findUserByUsernameAndPassword(userLoginBindingModel.getUsername(),
+                        userLoginBindingModel.getPassword());
 
-        userService.loginUser(user);
+        if (userServiceModel == null) {
+            return "login";
+        }
+
+        userService.loginUser(userServiceModel.getId()
+                , userServiceModel.getUsername(), httpSession);
+        return "redirect:/";
+    }
+
+    @GetMapping("/logout")
+    public String logout() {
+        httpSession.invalidate();
         return "redirect:/";
     }
 
 
     @ModelAttribute
-    public UserRegisterBindingModel userRegisterBindingModel(){
+    public UserRegisterBindingModel userRegisterBindingModel() {
         return new UserRegisterBindingModel();
     }
+
     @ModelAttribute
-    public UserLoginBindingModel userLoginBindingModel(){
+    public UserLoginBindingModel userLoginBindingModel() {
         return new UserLoginBindingModel();
     }
 }
