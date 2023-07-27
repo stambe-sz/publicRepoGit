@@ -82,7 +82,11 @@ public class UserController {
                         userLoginBindingModel.getPassword());
 
         if (userServiceModel == null) {
-            return "login";
+
+            redirectAttributes.addFlashAttribute("userLoginBindingModel",userLoginBindingModel);
+            redirectAttributes.addFlashAttribute("isFound", false);
+
+            return "redirect:login";
         }
 
         userService.loginUser(userServiceModel.getId()

@@ -26,7 +26,8 @@ public class UserService {
     }
 
     public UserServiceModel findUserByUsernameAndPassword(String username, String password) {
-        User foundUser = this.userRepository.findByUsernameAndPassword(username, password);
+        User foundUser = this.userRepository.findByUsernameAndPassword(username, password)
+                .orElse(null);
 
         if (foundUser == null) {
             return null;
