@@ -17,7 +17,6 @@ public class TaskService {
 
     public List<UserAssignedTasksBindingModel> findAllTasksById(HttpSession httpSession) {
         Long id = (Long) httpSession.getAttribute("id");
-        taskRepository.findAllTasksByUserId(id);
-        return null;
+        return taskRepository.findAllTasksByUserId(id);
     }
 }
