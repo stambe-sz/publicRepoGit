@@ -31,6 +31,7 @@ public class HomeController {
             taskService.findAllTasksById(httpSession);
         model.addAttribute("assignedToMe",assignedToMe);
 
+        List<UserAssignedTasksBindingModel> allAvailableTasks =
 
         return "home";
     }

@@ -1,6 +1,5 @@
 package com.plannerapp.model.binding;
-
-import com.plannerapp.model.entity.Priority;
+import com.plannerapp.model.entity.User;
 import com.plannerapp.model.enums.PriorityNameEnum;
 
 import java.time.LocalDate;
@@ -11,12 +10,14 @@ public class UserAssignedTasksBindingModel {
     private String description;
     private LocalDate dueDate;
     private String priority;
+    private User user;
 
-    public UserAssignedTasksBindingModel(Long id, String description, LocalDate dueDate, PriorityNameEnum priority) {
+    public UserAssignedTasksBindingModel(Long id, String description, LocalDate dueDate, PriorityNameEnum priority, User user) {
         this.id = id;
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority.name();
+        this.user = user;
     }
 
     public Long getId() {
@@ -49,5 +50,13 @@ public class UserAssignedTasksBindingModel {
 
     public void setPriority(String priority) {
         this.priority = priority;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
