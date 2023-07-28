@@ -10,14 +10,12 @@ public class UserAssignedTasksBindingModel {
     private String description;
     private LocalDate dueDate;
     private String priority;
-    private User user;
 
-    public UserAssignedTasksBindingModel(Long id, String description, LocalDate dueDate, PriorityNameEnum priority, User user) {
+    public UserAssignedTasksBindingModel(Long id, String description, LocalDate dueDate, PriorityNameEnum priority) {
         this.id = id;
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority.name();
-        this.user = user;
     }
 
     public Long getId() {
@@ -52,11 +50,4 @@ public class UserAssignedTasksBindingModel {
         this.priority = priority;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }

@@ -14,6 +14,6 @@ public interface TaskRepository extends JpaRepository<Task,Long> {
     @Query("SELECT new com.plannerapp.model.binding.UserAssignedTasksBindingModel(t.id,t.description,t.dueDate,t.priority.name) FROM Task t WHERE t.user.id = :id")
     List<UserAssignedTasksBindingModel> findAllTasksByUserId(Long id);
 
-    @Query("SELECT new com.plannerapp.model.binding.AllAvailableTasksBindingModel(t.id,) FROM Task t ")
+    @Query("SELECT new com.plannerapp.model.binding.AllAvailableTasksBindingModel(t.id,t.description,t.dueDate,t.priority.name,t.user.username) FROM Task t WHERE t.user.id = null ")
     List<AllAvailableTasksBindingModel> findAllAvailableTasks(Long id);
 }
