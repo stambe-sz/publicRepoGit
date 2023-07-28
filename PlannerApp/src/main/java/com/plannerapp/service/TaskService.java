@@ -1,5 +1,6 @@
 package com.plannerapp.service;
 
+import com.plannerapp.model.binding.AllAvailableTasksBindingModel;
 import com.plannerapp.model.binding.UserAssignedTasksBindingModel;
 import com.plannerapp.model.entity.Task;
 import com.plannerapp.model.service.TaskServiceModel;
@@ -38,5 +39,10 @@ public class TaskService {
                 .findByPriorityName(taskServiceModel.getPriority()));
 
         taskRepository.save(task);
+    }
+
+    public List<AllAvailableTasksBindingModel> findAllAvailableTasks(HttpSession httpSession) {
+        Long id = (Long) httpSession.getAttribute("id");
+        return taskRepository.findAllAvailableTasks(id);
     }
 }

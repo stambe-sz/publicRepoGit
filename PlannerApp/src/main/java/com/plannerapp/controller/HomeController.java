@@ -1,5 +1,6 @@
 package com.plannerapp.controller;
 
+import com.plannerapp.model.binding.AllAvailableTasksBindingModel;
 import com.plannerapp.model.binding.UserAssignedTasksBindingModel;
 import com.plannerapp.service.TaskService;
 import org.modelmapper.ModelMapper;
@@ -27,12 +28,13 @@ public class HomeController {
         if (httpSession.getAttribute("id") == null){
             return "index";
         }
-        //todo remake id to user
         List<UserAssignedTasksBindingModel> assignedToMe =
             taskService.findAllTasksById(httpSession);
         model.addAttribute("assignedToMe",assignedToMe);
 
-        List<UserAssignedTasksBindingModel> allAvailableTasks =
+        List<AllAvailableTasksBindingModel> allAvailableTasks =
+                taskService.findAllAvailableTasks(httpSession);
+        model.addAttribute("allAvailableTasks",allAvailableTasks);
 
         return "home";
     }

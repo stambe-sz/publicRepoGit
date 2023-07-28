@@ -56,5 +56,7 @@ public class TaskController {
 
     }
     @ModelAttribute
-
+    public TaskAddBindingModel taskAddBindingModel(){
+        return new TaskAddBindingModel();
+    }
 }
