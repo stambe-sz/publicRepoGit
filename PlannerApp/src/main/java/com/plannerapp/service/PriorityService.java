@@ -34,4 +34,10 @@ public class PriorityService {
                     priorityRepository.save(priority);
                 });
     }
+
+
+    public Priority findByPriorityName(Priority priority) {
+        return priorityRepository
+                .findByName(priority.getName()).orElse(null);
+    }
 }

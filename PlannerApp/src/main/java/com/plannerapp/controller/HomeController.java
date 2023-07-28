@@ -27,6 +27,7 @@ public class HomeController {
         if (httpSession.getAttribute("id") == null){
             return "index";
         }
+        //todo remake id to user
         List<UserAssignedTasksBindingModel> assignedToMe =
             taskService.findAllTasksById(httpSession);
         model.addAttribute("assignedToMe",assignedToMe);

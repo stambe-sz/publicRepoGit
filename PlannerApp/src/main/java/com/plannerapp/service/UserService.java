@@ -41,4 +41,8 @@ public class UserService {
         httpSession.setAttribute("id",id);
         httpSession.setAttribute("username",username);
     }
+
+    public User findById(Long id) {
+        return userRepository.findById(id).orElse(null);
+    }
 }
