@@ -34,15 +34,13 @@ public class TaskService {
 
     public void addTask(TaskServiceModel taskServiceModel, HttpSession httpSession) {
         Task task = modelMapper.map(taskServiceModel, Task.class);
-        task.setUser(userService.findById((Long) httpSession.getAttribute("id")));
         task.setPriority(priorityService
-                .findByPriorityName(taskServiceModel.getPriority()));
+                .findPriorityNameEnum(taskServiceModel.getPriority()));
 
         taskRepository.save(task);
     }
 
-    public List<AllAvailableTasksBindingModel> findAllAvailableTasks(HttpSession httpSession) {
-        Long id = (Long) httpSession.getAttribute("id");
-        return taskRepository.findAllAvailableTasks(id);
+    public List<AllAvailableTasksBindingModel> findAllAvailableTasks() {
+        return taskRepository.findAllAvailableTasks();
     }
 }

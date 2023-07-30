@@ -36,8 +36,8 @@ public class PriorityService {
     }
 
 
-    public Priority findByPriorityName(Priority priority) {
+    public Priority findPriorityNameEnum(PriorityNameEnum priority) {
         return priorityRepository
-                .findByName(priority.getName()).orElse(null);
+                .findByName(priority).orElse(null);
     }
 }
