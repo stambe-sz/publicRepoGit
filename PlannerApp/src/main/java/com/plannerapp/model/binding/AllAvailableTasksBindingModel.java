@@ -13,15 +13,13 @@ public class AllAvailableTasksBindingModel {
     private String description;
     private LocalDate dueDate;
     private String priority;
-    private String user;
 
 
-    public AllAvailableTasksBindingModel(Long id, String description, LocalDate dueDate, PriorityNameEnum priority, String user) {
+    public AllAvailableTasksBindingModel(Long id, String description, LocalDate dueDate, PriorityNameEnum priority) {
         this.id = id;
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority.name();
-        this.user = user;
     }
 
     public Long getId() {
@@ -54,13 +52,5 @@ public class AllAvailableTasksBindingModel {
 
     public void setPriority(String priority) {
         this.priority = priority;
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
     }
 }

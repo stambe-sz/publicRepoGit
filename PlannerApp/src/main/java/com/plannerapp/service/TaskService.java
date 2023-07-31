@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TaskService {
@@ -41,6 +42,6 @@ public class TaskService {
     }
 
     public List<AllAvailableTasksBindingModel> findAllAvailableTasks() {
-        return taskRepository.findAllAvailableTasks();
+       return taskRepository.findAllAvailableTasks();
     }
 }
