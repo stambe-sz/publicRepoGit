@@ -65,6 +65,11 @@ public class TaskController {
         this.taskService.assignToMe(id);
         return "redirect:/";
     }
+    @GetMapping("/return/{id}")
+    public String returnTask(@PathVariable Long id){
+        this.taskService.returnTask(id);
+        return "redirect:/";
+    }
 
     @ModelAttribute
     public TaskAddBindingModel taskAddBindingModel() {

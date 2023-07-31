@@ -19,7 +19,7 @@
                                 <td style="width: 15%" th:text="${task.priority}">{priority}</td>
                                 <td style="width: 40%" th:text="${task.dueDate}">{dueDate}</td>
                                 <td><a th:href="@{/tasks/delete/{id}(id=*{task.id})}"><img src="/img/done-remove-button.png" height="35px"></a></td>
-                                <td><a href="/"><img src="/img/return.png" height="35px"></a></td>
+                                <td><a th:href="@{/tasks/return/{id}(id=*{task.id})}"><img src="/img/return.png" height="35px"></a></td>
                             </tr>
                         </table>
                     </li>
@@ -41,7 +41,7 @@
                                     <td style="width: 5%"><img class="mr-2 " src="/img/pin.png" alt="Pin" width="35px" height="35px"></td>
                                     <td style="width: 15%"><a th:text="${task.priority}">{priority}</a></td>
                                     <td><a th:text="|Due Date: ${task.dueDate}|">Due Date: {dueDate}</a></td>
-                                    <td><a class="ml-3" href="/"><img src="/img/assign-to-me-button.png" height="35px"></a></td>
+                                    <td><a class="ml-3" th:href="@{/tasks/assign/{id}(id=*{task.id})}"><img src="/img/assign-to-me-button.png" height="35px"></a></td>
                                 </tr>
                             </table>
                         </li>

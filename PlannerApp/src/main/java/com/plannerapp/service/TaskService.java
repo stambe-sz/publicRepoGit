@@ -64,4 +64,10 @@ public class TaskService {
     private User getCurrentUser(Long userId) {
         return this.userService.findUser(userId);
     }
+
+    public void returnTask(Long id) {
+        Optional<Task> task = this.taskRepository.findById(id);
+        task.get().setUser(null);
+        this.taskRepository.save(task.get());
+    }
 }
