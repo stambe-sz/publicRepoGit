@@ -3,6 +3,7 @@ package com.plannerapp.service;
 import com.plannerapp.model.binding.AllAvailableTasksBindingModel;
 import com.plannerapp.model.binding.UserAssignedTasksBindingModel;
 import com.plannerapp.model.entity.Task;
+import com.plannerapp.model.entity.User;
 import com.plannerapp.model.service.TaskServiceModel;
 import com.plannerapp.repo.TaskRepository;
 import org.modelmapper.ModelMapper;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,8 +42,26 @@ public class TaskService {
 
         taskRepository.save(task);
     }
+    public void deleteTask(Long id){
+        Optional<Task> task = this.taskRepository.findById(id);
+
+        this.taskRepository.delete(task.get());
+    }
 
     public List<AllAvailableTasksBindingModel> findAllAvailableTasks() {
        return taskRepository.findAllAvailableTasks();
+    }
+
+    public void assignToMe(Long id) {
+        Long userId = (Long) httpSession.getAttribute("id");
+        Optional<Task> task = this.taskRepository.findById(id);
+        User user = getCurrentUser(userId);
+        task.get().setUser(user);
+        this.taskRepository.save(task.get());
+
+    }
+
+    private User getCurrentUser(Long userId) {
+        return this.userService.findUser(userId);
     }
 }
