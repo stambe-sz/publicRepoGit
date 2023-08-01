@@ -7,6 +7,7 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.time.LocalDate;
 
 @Setter
 @Getter
@@ -19,4 +20,9 @@ public class Song  extends BaseEntity{
     private String performer;
     @Column(nullable = false)
     private String title;
+    @Column(nullable = false)
+    private Integer duration;
+    @Column(name = "release_date")
+    private LocalDate releaseDate;
+    private Style style;
 }
