@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.util.List;
 
@@ -21,5 +22,6 @@ public class User extends BaseEntity{
     private String password;
     @Column(nullable = false,unique = true)
     private String email;
+    @ManyToMany
     List<Song> Playlist;
 }
