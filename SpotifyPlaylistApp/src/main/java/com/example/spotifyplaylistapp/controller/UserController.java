@@ -1,6 +1,7 @@
 package com.example.spotifyplaylistapp.controller;
 
 import com.example.spotifyplaylistapp.model.binding.UserRegisterBindingModel;
+import com.example.spotifyplaylistapp.model.service.UserServiceModel;
 import com.example.spotifyplaylistapp.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
@@ -40,6 +41,8 @@ public class UserController {
 
             return "redirect:register";
         }
+        userService.registerUser(modelMapper
+                .map(userRegisterBindingModel, UserServiceModel.class));
 
 
         return "redirect:/login";
