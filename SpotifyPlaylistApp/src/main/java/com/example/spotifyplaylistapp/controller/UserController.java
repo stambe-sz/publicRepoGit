@@ -1,5 +1,6 @@
 package com.example.spotifyplaylistapp.controller;
 
+import com.example.spotifyplaylistapp.model.binding.UserLoginBindingModel;
 import com.example.spotifyplaylistapp.model.binding.UserRegisterBindingModel;
 import com.example.spotifyplaylistapp.model.service.UserServiceModel;
 import com.example.spotifyplaylistapp.service.UserService;
@@ -31,16 +32,17 @@ public class UserController {
     }
 
     @GetMapping("/register")
-    public String register(){
+    public String register() {
         return "register";
     }
+
     @PostMapping("/register")
     public String confirmRegister(@Valid UserRegisterBindingModel userRegisterBindingModel,
                                   BindingResult bindingResult,
-                                  RedirectAttributes redirectAttributes){
+                                  RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors() || !userRegisterBindingModel.getPassword()
-                .equals(userRegisterBindingModel.getConfPassword())){
-            redirectAttributes.addFlashAttribute("userRegisterBindingModel",userRegisterBindingModel);
+                .equals(userRegisterBindingModel.getConfPassword())) {
+            redirectAttributes.addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel", bindingResult);
 
             return "redirect:register";
@@ -51,20 +53,31 @@ public class UserController {
 
         return "redirect:/login";
     }
+
     @GetMapping("/login")
-    public String login(Model model){
-        if (model.containsAttribute("isFound")){
-            model.addAttribute("isFound",true);
+    public String login(Model model) {
+        if (model.containsAttribute("isFound")) {
+            model.addAttribute("isFound", true);
         }
         return "login";
     }
+
     @PostMapping("/login")
-    public String confLogin(@Valid ){
+    public String confLogin(@Valid UserLoginBindingModel userLoginBindingModel,
+                            BindingResult bindingResult,
+                            RedirectAttributes redirectAttributes) {
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userLoginBindingModel", bindingResult);
+
+            return "redirect:login";
+        }
 
     }
 
     @ModelAttribute
-    public UserRegisterBindingModel userRegisterBindingModel(){
+    public UserRegisterBindingModel userRegisterBindingModel() {
         return new UserRegisterBindingModel();
     }
 }
