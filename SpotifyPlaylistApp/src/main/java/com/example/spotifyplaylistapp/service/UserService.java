@@ -24,4 +24,14 @@ public class UserService {
         User user = modelMapper.map(userServiceModel,User.class);
         userRepository.save(user);
     }
+
+    public UserServiceModel findUserByUsernameAndPassword(String username, String password) {
+        User foundUser = userRepository.
+                findByUsernameAndPassword(username,password).orElse(null);
+        if (foundUser == null){
+            return null;
+        }
+        UserServiceModel u = modelMapper.map(foundUser, UserServiceModel.class);
+        return u;
+    }
 }

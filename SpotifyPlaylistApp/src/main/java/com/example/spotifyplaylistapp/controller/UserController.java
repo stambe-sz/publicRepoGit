@@ -74,6 +74,20 @@ public class UserController {
             return "redirect:login";
         }
 
+        UserServiceModel userServiceModel = userService
+                .findUserByUsernameAndPassword(userLoginBindingModel.getUsername(),
+                        userLoginBindingModel.getPassword());
+        if (userServiceModel == null){
+            redirectAttributes.addFlashAttribute("userLoginBindingModel",userLoginBindingModel);
+            redirectAttributes.addFlashAttribute("isFound",false);
+            return "redirect:login";
+        }
+
+        userService.loginUser(userServiceModel.getId(),
+                userServiceModel.getUsername(),httpSession);
+
+        return "redirect:/";
+
     }
 
     @ModelAttribute
