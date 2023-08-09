@@ -34,4 +34,9 @@ public class UserService {
         UserServiceModel u = modelMapper.map(foundUser, UserServiceModel.class);
         return u;
     }
+
+    public void loginUser(Long id, String username, HttpSession httpSession) {
+        httpSession.setAttribute("id",id);
+        httpSession.setAttribute("username",username);
+    }
 }

@@ -82,12 +82,15 @@ public class UserController {
             redirectAttributes.addFlashAttribute("isFound",false);
             return "redirect:login";
         }
-
         userService.loginUser(userServiceModel.getId(),
                 userServiceModel.getUsername(),httpSession);
 
         return "redirect:/";
-
+    }
+    @GetMapping("/logout")
+    public String logout(){
+        httpSession.invalidate();
+        return "redirect:/";
     }
 
     @ModelAttribute
