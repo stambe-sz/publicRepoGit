@@ -56,7 +56,7 @@ public class UserController {
 
     @GetMapping("/login")
     public String login(Model model) {
-        if (model.containsAttribute("isFound")) {
+        if (!model.containsAttribute("isFound")) {
             model.addAttribute("isFound", true);
         }
         return "login";
