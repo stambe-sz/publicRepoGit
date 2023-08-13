@@ -1,6 +1,7 @@
 package com.example.spotifyplaylistapp.model.service;
 
 import com.example.spotifyplaylistapp.model.entity.Style;
+import com.example.spotifyplaylistapp.model.enums.StyleNameEnum;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,5 +17,5 @@ public class SongServiceModel {
     private String title;
     private LocalDate releaseDate;
     private Integer duration;
-    private Style style;
+    private StyleNameEnum style;
 }

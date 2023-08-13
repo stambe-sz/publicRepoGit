@@ -6,6 +6,7 @@ import com.example.spotifyplaylistapp.repository.StyleRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 @Service
 public class StyleService {
@@ -23,9 +24,14 @@ public class StyleService {
         Arrays.stream(StyleNameEnum.values())
                 .forEach(styleNameEnum -> {
                     Style style = new Style();
-                    style.setStyleName(styleNameEnum);
+                    style.setName(styleNameEnum);
                     styleRepository.save(style);
                 });
 
+    }
+
+    public Style findByStyleName(StyleNameEnum styleNameEnum) {
+        return styleRepository.findByName(styleNameEnum)
+                .orElse(null);
     }
 }

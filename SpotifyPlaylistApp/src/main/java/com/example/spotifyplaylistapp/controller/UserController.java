@@ -51,7 +51,7 @@ public class UserController {
                 .map(userRegisterBindingModel, UserServiceModel.class));
 
 
-        return "redirect:/login";
+        return "redirect:login";
     }
 
     @GetMapping("/login")

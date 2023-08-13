@@ -15,7 +15,8 @@ import javax.persistence.*;
 public class Style  extends BaseEntity{
 
     @Enumerated(EnumType.STRING)
-    private StyleNameEnum styleName;
+    @Column(unique = true,nullable = false)
+    private StyleNameEnum name;
 
     @Column
     private String description;

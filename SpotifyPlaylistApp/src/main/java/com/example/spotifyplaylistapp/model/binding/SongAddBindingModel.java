@@ -30,5 +30,5 @@ public class SongAddBindingModel {
     @NotNull
     private Integer duration;
     @NotNull
-    private Style style;
+    private String style;
 }
