@@ -2,6 +2,7 @@ package com.example.spotifyplaylistapp.service;
 
 import com.example.spotifyplaylistapp.model.binding.SongBindingModel;
 import com.example.spotifyplaylistapp.model.entity.Song;
+import com.example.spotifyplaylistapp.model.entity.Style;
 import com.example.spotifyplaylistapp.model.enums.StyleNameEnum;
 import com.example.spotifyplaylistapp.model.service.SongServiceModel;
 import com.example.spotifyplaylistapp.repository.SongRepository;
@@ -33,18 +34,25 @@ public class SongService {
         songRepository.save(song);
     }
 
-    public List<SongBindingModel> findSongByGenre(StyleNameEnum styleNameEnum) {
-        return this.songRepository.findByStyleName(styleNameEnum)
-                .stream().collect(Collectors.toList());
+    public List<SongBindingModel> findSongByGenre(Style style) {
+
+        return this.songRepository.findByStyle(style)
+                .stream()
+                .map(this::mapSong)
+                .collect(Collectors.toList());
     }
 
     private SongBindingModel mapSong(Song song){
-        SongBindingModel songBindingModel = new SongBindingModel();
-        songBindingModel.setId(song.getId());
-        songBindingModel.setPerformer(song.getPerformer());
-        songBindingModel.setDuration(song.getDuration());
-        songBindingModel.setTitle(song.getTitle());
+        SongBindingModel songBindingModel = new SongBindingModel(song.getId(),
+                song.getPerformer(),
+                song.getTitle(),
+                song.getDuration(),
+                song.getStyle().getName());
 
         return songBindingModel;
+    }
+
+    public List<SongBindingModel> findByStyle(Style style) {
+        return this.songRepository.findByStyle(style);
     }
 }
