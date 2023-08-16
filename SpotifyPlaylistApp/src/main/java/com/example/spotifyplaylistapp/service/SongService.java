@@ -5,6 +5,8 @@ import com.example.spotifyplaylistapp.model.entity.Song;
 import com.example.spotifyplaylistapp.model.entity.Style;
 import com.example.spotifyplaylistapp.model.enums.StyleNameEnum;
 import com.example.spotifyplaylistapp.model.service.SongServiceModel;
+import com.example.spotifyplaylistapp.model.service.StyleServiceModel;
+import com.example.spotifyplaylistapp.model.views.SongViewModel;
 import com.example.spotifyplaylistapp.repository.SongRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -30,29 +32,34 @@ public class SongService {
     public void addSong(SongServiceModel songServiceModel) {
         Song song = modelMapper.map(songServiceModel,Song.class);
         song.setStyle(styleService
-                .findByStyleName(songServiceModel.getStyle()));
+                .findByStyleName(songServiceModel.getStyle().getName()));
         songRepository.save(song);
     }
 
-    public List<SongBindingModel> findSongByGenre(Style style) {
-
-        return this.songRepository.findByStyle(style)
+    public List<SongServiceModel> findSongByGenre(String style1) {
+        //POP
+        style1 = style1.toUpperCase().trim();
+        String finalStyle = style1;
+        List<SongServiceModel> list = this.songRepository.findAll()
                 .stream()
-                .map(this::mapSong)
-                .collect(Collectors.toList());
+                .filter(e ->
+                        e.getStyle().getName().name().toUpperCase().trim()
+                                .equals(finalStyle))
+                .map(e -> this.modelMapper.map(
+                        e, SongServiceModel.class
+                ))
+                .toList();
+return list;
+//        return this.songRepository.findSongByStyleName(style);
     }
 
-    private SongBindingModel mapSong(Song song){
-        SongBindingModel songBindingModel = new SongBindingModel(song.getId(),
-                song.getPerformer(),
-                song.getTitle(),
-                song.getDuration(),
-                song.getStyle().getName());
+    private SongViewModel mapSong(Song song){
+        SongViewModel songViewModel = new SongViewModel();
+                songViewModel.setId(song.getId());
+                songViewModel.setPerformer(song.getPerformer());
+                songViewModel.setTitle(song.getTitle());
+                songViewModel.setDuration(song.getDuration());
 
-        return songBindingModel;
-    }
-
-    public List<SongBindingModel> findByStyle(Style style) {
-        return this.songRepository.findByStyle(style);
+        return songViewModel;
     }
 }

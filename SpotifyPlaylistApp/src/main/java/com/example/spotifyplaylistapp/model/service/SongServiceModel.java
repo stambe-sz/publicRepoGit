@@ -17,5 +17,7 @@ public class SongServiceModel {
     private String title;
     private LocalDate releaseDate;
     private Integer duration;
-    private StyleNameEnum style;
+
+    private StyleServiceModel style;
+    //private StyleNameEnum style;
 }
