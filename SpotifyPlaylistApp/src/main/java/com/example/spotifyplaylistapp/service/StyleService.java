@@ -30,8 +30,8 @@ public class StyleService {
 
     }
 
-    public Style findByStyleName(StyleNameEnum styleNameEnum) {
-        return styleRepository.findByName(styleNameEnum)
+    public Style findByStyleName(StyleNameEnum style) {
+        return styleRepository.findByName(style)
                 .orElse(null);
     }
 }

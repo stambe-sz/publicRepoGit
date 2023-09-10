@@ -30,36 +30,34 @@ public class SongService {
     }
 
     public void addSong(SongServiceModel songServiceModel) {
-        Song song = modelMapper.map(songServiceModel,Song.class);
-        song.setStyle(styleService
-                .findByStyleName(songServiceModel.getStyle().getName()));
-        songRepository.save(song);
+        this.songRepository.save(this.mapSong(songServiceModel));
     }
 
-    public List<SongServiceModel> findSongByGenre(String style1) {
-        //POP
-        style1 = style1.toUpperCase().trim();
-        String finalStyle = style1;
-        List<SongServiceModel> list = this.songRepository.findAll()
-                .stream()
-                .filter(e ->
-                        e.getStyle().getName().name().toUpperCase().trim()
-                                .equals(finalStyle))
-                .map(e -> this.modelMapper.map(
-                        e, SongServiceModel.class
-                ))
-                .toList();
-return list;
-//        return this.songRepository.findSongByStyleName(style);
+    public List<SongServiceModel> findSongByGenre(Style style) {
+
+//        List<SongServiceModel> list = this.songRepository.findAll()
+//                .stream()
+//                .filter(e ->
+//                        e.getStyle().getName().name().toUpperCase().trim()
+//                                .equals(finalStyle))
+//                .map(e -> this.modelMapper.map(
+//                        e, SongServiceModel.class
+//                ))
+//                .toList();
+//        return list;
+        return this.songRepository.findSongByStyleName(style);
     }
 
-    private SongViewModel mapSong(Song song){
-        SongViewModel songViewModel = new SongViewModel();
-                songViewModel.setId(song.getId());
-                songViewModel.setPerformer(song.getPerformer());
-                songViewModel.setTitle(song.getTitle());
-                songViewModel.setDuration(song.getDuration());
+    private Song mapSong(SongServiceModel songServiceModel) {
+        Song song = new Song();
+        Style style = this.styleService.findByStyleName(songServiceModel.getStyle().getName());
 
-        return songViewModel;
+        song.setPerformer(songServiceModel.getPerformer());
+        song.setTitle(songServiceModel.getTitle());
+        song.setDuration(songServiceModel.getDuration());
+        song.setStyle(style);
+        song.setReleaseDate(songServiceModel.getReleaseDate());
+
+        return song;
     }
 }
