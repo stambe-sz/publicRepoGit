@@ -1,7 +1,6 @@
 package com.example.spotifyplaylistapp.controller;
 import com.example.spotifyplaylistapp.model.entity.Style;
 import com.example.spotifyplaylistapp.model.enums.StyleNameEnum;
-import com.example.spotifyplaylistapp.model.service.SongServiceModel;
 import com.example.spotifyplaylistapp.model.views.SongViewModel;
 import com.example.spotifyplaylistapp.service.SongService;
 import com.example.spotifyplaylistapp.service.StyleService;
@@ -16,10 +15,12 @@ import java.util.List;
 public class HomeController {
     private final SongService songService;
     private final StyleService styleService;
+    private final HttpSession httpSession;
 
-    public HomeController(SongService songService, StyleService styleService) {
+    public HomeController(SongService songService, StyleService styleService, HttpSession httpSession) {
         this.songService = songService;
         this.styleService = styleService;
+        this.httpSession = httpSession;
     }
 
     @GetMapping("/")
@@ -33,6 +34,8 @@ public class HomeController {
         model.addAttribute("rockSongs",rockSongs);
         List<SongViewModel> jazzSongs = findSongByGenre(this.styleService.findByStyleName(StyleNameEnum.JAZZ));
         model.addAttribute("jazzSongs",jazzSongs);
+        List<SongViewModel> myPlaylist = songService.getPlaylistByUserId(httpSession);
+
         return "home";
     }
     private List<SongViewModel> findSongByGenre(Style style){

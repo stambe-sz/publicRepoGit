@@ -72,4 +72,14 @@ public class SongService {
 
         return song;
     }
+
+    public List<SongViewModel> getPlaylistByUserId(HttpSession httpSession) {
+
+        Long id = (Long) httpSession.getAttribute("id");
+
+        return this.songRepository.findAllSongsByUserId(id)
+                .stream()
+                .map(this::mapSongView)
+                .collect(Collectors.toList());
+    }
 }
