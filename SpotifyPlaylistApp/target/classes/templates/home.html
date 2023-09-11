@@ -11,9 +11,9 @@
 
                 <h3 class="mySticky bg-gray text-dark  mb-0 mt-2">Pop</h3>
                 <div class="bg-dark rounded " style="height: 20vh; overflow: auto">
-                    <div class="mt-1 rounded badge-info">
+                    <div th:each="popSong : ${popSongs}" class="mt-1 rounded badge-info">
                         <img class="mr-1" src="/img/pop.png" alt="Pop" width="30px" height="30px">
-                        <span>{performer} - {title} ({duration} min)</span>
+                        <span th:text="|*{popSong.performer} - *{popSong.title} (*{popSong.duration} min)|">{performer} - {title} ({duration} min)</span>
                         <a class="ml-3 text-danger" href="/">Add</a>
                     </div>
                 </div>

@@ -48,7 +48,6 @@ public class SongService {
 //                ))
 //                .toList();
 //        return list;
-        return;
     }
     private SongViewModel mapSongView(Song song){
         SongViewModel songViewModel = new SongViewModel();
