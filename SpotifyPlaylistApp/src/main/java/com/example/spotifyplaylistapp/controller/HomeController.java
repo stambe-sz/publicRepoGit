@@ -1,6 +1,8 @@
 package com.example.spotifyplaylistapp.controller;
 import com.example.spotifyplaylistapp.model.entity.Style;
+import com.example.spotifyplaylistapp.model.enums.StyleNameEnum;
 import com.example.spotifyplaylistapp.model.service.SongServiceModel;
+import com.example.spotifyplaylistapp.model.views.SongViewModel;
 import com.example.spotifyplaylistapp.service.SongService;
 import com.example.spotifyplaylistapp.service.StyleService;
 import org.springframework.stereotype.Controller;
@@ -25,11 +27,11 @@ public class HomeController {
         if (httpSession.getAttribute("id") == null) {
             return "index";
         }
-        //<SongServiceModel> popSongs = findSongByGenre();
-
+        List<SongViewModel> popSongs = findSongByGenre(this.styleService.findByStyleName(StyleNameEnum.POP));
+        model.addAttribute("popSongs",popSongs);
         return "home";
     }
-    private List<SongServiceModel> findSongByGenre(Style style){
+    private List<SongViewModel> findSongByGenre(Style style){
         return this.songService.findSongByGenre(style);
     }
 

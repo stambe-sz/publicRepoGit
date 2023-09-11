@@ -18,6 +18,6 @@ public class SongServiceModel {
     private LocalDate releaseDate;
     private Integer duration;
 
-    private StyleServiceModel style;
+    private StyleNameEnum style;
     //private StyleNameEnum style;
 }
