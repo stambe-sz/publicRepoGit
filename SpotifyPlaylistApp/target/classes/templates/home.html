@@ -20,18 +20,18 @@
 
                 <h3 class="mySticky bg-gray text-dark  mb-0 mt-2">Rock</h3>
                 <div class="bg-dark rounded m-auto" style="height: 20vh; overflow: auto">
-                    <div class="mt-1 rounded badge-warning">
+                    <div th:each="rockSong : ${rockSongs}" class="mt-1 rounded badge-warning">
                         <img class="mr-1" src="/img/rock.png" alt="Rock" width="30px" height="30px">
-                        <span>{performer} - {title} ({duration} min)</span>
+                        <span th:text="|*{rockSong.performer} - *{rockSong.title} (*{rockSong.duration} min)|">{performer} - {title} ({duration} min)</span>
                         <a class="ml-3 text-danger" href="/">Add</a>
                     </div>
                 </div>
 
                 <h3 class="mySticky bg-gray text-dark  mb-0 mt-2">Jazz</h3>
                 <div class="bg-dark rounded m-auto" style="height: 20vh; overflow: auto">
-                    <div class="mt-3 rounded badge-success">
+                    <div th:each="jazzSong : ${jazzSongs}" class="mt-3 rounded badge-success">
                         <img class="mr-1" src="/img/jazz.png" alt="Jazz" width="30px" height="30px">
-                        <span>{performer} - {title} ({duration} min)</span>
+                        <span th:text="|*{jazzSong.performer} - *{jazzSong.title} (*{jazzSong.duration} min)|">{performer} - {title} ({duration} min)</span>
                         <a class="ml-3 text-danger" href="/">Add</a>
                     </div>
                 </div>

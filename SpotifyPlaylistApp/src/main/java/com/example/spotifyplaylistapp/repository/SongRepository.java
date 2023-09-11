@@ -16,7 +16,7 @@ import java.util.Optional;
 @Repository
 public interface SongRepository extends JpaRepository<Song, Long> {
     //@Query("SELECT new com.example.spotifyplaylistapp.model.binding.SongBindingModel(s.id,s.performer,s.title,s.duration,s.style.name) FROM Song s WHERE s.style.name = :styleName")
-    List<Song> findSongByStyleName(Style style);
+    List<Song> findSongByStyle(Style style);
 
 
 }

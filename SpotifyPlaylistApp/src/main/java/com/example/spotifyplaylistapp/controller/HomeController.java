@@ -29,6 +29,10 @@ public class HomeController {
         }
         List<SongViewModel> popSongs = findSongByGenre(this.styleService.findByStyleName(StyleNameEnum.POP));
         model.addAttribute("popSongs",popSongs);
+        List<SongViewModel> rockSongs = findSongByGenre(this.styleService.findByStyleName(StyleNameEnum.ROCK));
+        model.addAttribute("rockSongs",rockSongs);
+        List<SongViewModel> jazzSongs = findSongByGenre(this.styleService.findByStyleName(StyleNameEnum.JAZZ));
+        model.addAttribute("jazzSongs",jazzSongs);
         return "home";
     }
     private List<SongViewModel> findSongByGenre(Style style){

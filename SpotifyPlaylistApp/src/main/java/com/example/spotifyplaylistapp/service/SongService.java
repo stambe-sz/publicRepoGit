@@ -35,8 +35,9 @@ public class SongService {
 
     public List<SongViewModel> findSongByGenre(Style style) {
 
-       return this.songRepository.findSongByStyleName(style)
-                .stream().map(this::mapSongView)
+        return this.songRepository.findSongByStyle(style)
+                .stream()
+                .map(this::mapSongView)
                 .collect(Collectors.toList());
 //        List<SongServiceModel> list = this.songRepository.findAll()
 //                .stream()
@@ -49,7 +50,8 @@ public class SongService {
 //                .toList();
 //        return list;
     }
-    private SongViewModel mapSongView(Song song){
+
+    private SongViewModel mapSongView(Song song) {
         SongViewModel songViewModel = new SongViewModel();
         songViewModel.setId(song.getId());
         songViewModel.setDuration(song.getDuration());
