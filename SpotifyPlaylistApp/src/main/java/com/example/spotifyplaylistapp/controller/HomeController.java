@@ -82,7 +82,8 @@ public class HomeController {
             return "redirect:/users/login";
         }
 
-        
+        Long userId = (Long) httpSession.getAttribute("id");
+        this.userService.deleteAll(userId);
         return "redirect:/home";
     }
     private List<SongViewModel> findSongByGenre(Style style){

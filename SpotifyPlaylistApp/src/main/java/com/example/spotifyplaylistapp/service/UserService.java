@@ -53,4 +53,11 @@ public class UserService {
         }
 
     }
+
+    public void deleteAll(Long id) {
+        User user = this.userRepository.findById(id).orElse(null);
+        assert user != null;
+        user.deleteAllSongs();
+        this.userRepository.save(user);
+    }
 }
