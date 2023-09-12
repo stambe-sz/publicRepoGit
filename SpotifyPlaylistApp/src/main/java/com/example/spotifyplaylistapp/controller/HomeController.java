@@ -9,11 +9,14 @@ import com.example.spotifyplaylistapp.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
+@RequestMapping("/")
 public class HomeController {
     private final SongService songService;
     private final StyleService styleService;
@@ -28,9 +31,17 @@ public class HomeController {
     }
 
     @GetMapping("/")
-    public String index(HttpSession httpSession, Model model) {
+    public String index(HttpSession httpSession) {
+        if (httpSession.getAttribute("id") != null){
+            return "redirect:/home";
+        }
+        return "index";
+    }
+    @GetMapping("/home")
+    public String home(HttpSession httpSession, Model model){
+
         if (httpSession.getAttribute("id") == null) {
-            return "index";
+            return "redirect:/";
         }
         List<SongViewModel> popSongs = findSongByGenre(this.styleService.findByStyleName(StyleNameEnum.POP));
         model.addAttribute("popSongs",popSongs);
@@ -43,7 +54,8 @@ public class HomeController {
 
         return "home";
     }
-    public String addSongToPlayList(Long id){
+    @GetMapping("/home/add-song-to-playlist/{id}")
+    public String addSongToPlayList(@PathVariable("id") Long id){
 
         if (httpSession.getAttribute("id") == null){
             return "redirect:/users/login";
