@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Controller
 @RequestMapping("/")
@@ -52,6 +53,13 @@ public class HomeController {
         List<SongViewModel> myPlaylist = songService.getPlaylistByUserId(httpSession);
         model.addAttribute("myPlayList",myPlaylist);
 
+
+        AtomicInteger total = new AtomicInteger();
+         myPlaylist.forEach(s -> {
+             total.addAndGet(s.getDuration());
+         });
+         model.addAttribute("totalSum",total);
+
         return "home";
     }
     @GetMapping("/home/add-song-to-playlist/{id}")
@@ -65,6 +73,16 @@ public class HomeController {
 
 
         this.userService.addSongToUser(userId,song);
+        return "redirect:/home";
+    }
+    @GetMapping("/home/delete-all-songs/{id}")
+    public String deleteAllSongs(@PathVariable("id") Long id, HttpSession httpSession){
+
+        if (httpSession.getAttribute("id") == null){
+            return "redirect:/users/login";
+        }
+
+        
         return "redirect:/home";
     }
     private List<SongViewModel> findSongByGenre(Style style){

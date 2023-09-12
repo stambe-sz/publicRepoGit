@@ -21,4 +21,8 @@ public class User extends BaseEntity{
     private String email;
     @ManyToMany(fetch = FetchType.EAGER)
     List<Song> playlist;
+
+    public void deleteAllSongs(){
+        this.playlist.clear();
+    }
 }
