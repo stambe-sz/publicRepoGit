@@ -14,7 +14,7 @@
                     <div th:each="popSong : ${popSongs}" class="mt-1 rounded badge-info">
                         <img class="mr-1" src="/img/pop.png" alt="Pop" width="30px" height="30px">
                         <span th:text="|*{popSong.performer} - *{popSong.title} (*{popSong.duration} min)|">{performer} - {title} ({duration} min)</span>
-                        <a class="ml-3 text-danger" href="/">Add</a>
+                        <a class="ml-3 text-danger" th:href="@{/}">Add</a>
                     </div>
                 </div>
 

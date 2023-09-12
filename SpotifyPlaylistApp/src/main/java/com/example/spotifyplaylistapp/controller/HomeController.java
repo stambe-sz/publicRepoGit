@@ -1,4 +1,5 @@
 package com.example.spotifyplaylistapp.controller;
+import com.example.spotifyplaylistapp.model.entity.Song;
 import com.example.spotifyplaylistapp.model.entity.Style;
 import com.example.spotifyplaylistapp.model.enums.StyleNameEnum;
 import com.example.spotifyplaylistapp.model.views.SongViewModel;
@@ -48,9 +49,10 @@ public class HomeController {
             return "redirect:/users/login";
         }
         Long userId = (Long) httpSession.getAttribute("id");
+        Song song = this.songService.findSongById(id);
 
 
-
+        this.userService.addSongToUser(userId,song);
         return "redirect:/home";
     }
     private List<SongViewModel> findSongByGenre(Style style){

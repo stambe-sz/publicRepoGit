@@ -82,4 +82,8 @@ public class SongService {
                 .map(this::mapSongView)
                 .collect(Collectors.toList());
     }
+
+    public Song findSongById(Long id) {
+        return this.songRepository.findById(id).orElse(null);
+    }
 }
