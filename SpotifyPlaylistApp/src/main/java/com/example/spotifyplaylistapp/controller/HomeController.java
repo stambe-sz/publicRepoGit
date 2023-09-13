@@ -75,15 +75,15 @@ public class HomeController {
         this.userService.addSongToUser(userId,song);
         return "redirect:/home";
     }
-    @GetMapping("/home/delete-all-songs/{id}")
-    public String deleteAllSongs(@PathVariable("id") Long id, HttpSession httpSession){
+    @GetMapping("/home/delete-all-songs")
+    public String deleteAllSongs( HttpSession httpSession){
 
         if (httpSession.getAttribute("id") == null){
             return "redirect:/users/login";
         }
 
-        Long userId = (Long) httpSession.getAttribute("id");
-        this.userService.deleteAll(userId);
+        Long id = (Long) httpSession.getAttribute("id");
+        this.userService.deleteAll(id);
         return "redirect:/home";
     }
     private List<SongViewModel> findSongByGenre(Style style){
