@@ -25,6 +25,10 @@ public class UserController {
     public String register(){
         return "register";
     }
+    @GetMapping("/register")
+    public String confirmRegister(){
+
+    }
 
     @GetMapping("/login")
     public String login(Model model){
