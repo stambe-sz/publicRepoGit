@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "posts")
-public class Post extends BaseEntity{
+public class Post extends BaseEntity {
 
     @Column(nullable = false)
     private String content;
@@ -22,4 +22,6 @@ public class Post extends BaseEntity{
     private User user;
     @ManyToMany(mappedBy = "likePosts")
     private List<User> userLikes;
+    @ManyToOne
+    private Mood mood;
 }
