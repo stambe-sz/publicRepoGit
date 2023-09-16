@@ -15,8 +15,10 @@ import java.util.List;
 @Table(name = "posts")
 public class Post extends BaseEntity {
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
+    @Column
+    private int likes;
     @ManyToOne
     @NotNull
     private User user;
