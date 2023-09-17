@@ -22,7 +22,24 @@ public class UserService {
 
     public void registerUser(UserServiceModel userServiceModel) {
 
-        User user = modelMapper.map(userServiceModel,User.class);
+        User user = modelMapper.map(userServiceModel, User.class);
         this.userRepository.save(user);
+    }
+
+    public UserServiceModel findUserByUsernameAndPassword(String username, String password) {
+        User foundUser = this.userRepository
+                .findUserByUsernameAndPassword(username,password)
+                .orElse(null);
+        if (foundUser == null){
+            return null;
+        }
+        UserServiceModel u = modelMapper.map(foundUser, UserServiceModel.class);
+
+        return u;
+    }
+
+    public void loginUser(Long id, String username, HttpSession httpSession) {
+        httpSession.setAttribute("id",id);
+        httpSession.setAttribute("username", username);
     }
 }
