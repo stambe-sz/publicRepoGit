@@ -1,5 +1,6 @@
 package com.likebookapp.controller;
 
+import com.likebookapp.model.binding.UserLoginBindingModel;
 import com.likebookapp.model.binding.UserRegisterBindingModel;
 import com.likebookapp.model.service.UserServiceModel;
 import com.likebookapp.service.UserService;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -26,16 +28,18 @@ public class UserController {
         this.modelMapper = modelMapper;
         this.httpSession = httpSession;
     }
+
     @GetMapping("/register")
-    public String register(){
+    public String register() {
         return "register";
     }
-    @GetMapping("/register")
+
+    @PostMapping("/register")
     public String confirmRegister(@Valid UserRegisterBindingModel userRegisterBindingModel,
                                   BindingResult bindingResult,
-                                  RedirectAttributes redirectAttributes){
+                                  RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors() || !userRegisterBindingModel.getPassword()
-                .equals(userRegisterBindingModel.getConfirmPassword())){
+                .equals(userRegisterBindingModel.getConfirmPassword())) {
 
             redirectAttributes.addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel", bindingResult);
@@ -50,10 +54,38 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String login(Model model){
+    public String login(Model model) {
         if (!model.containsAttribute("isFound")) {
             model.addAttribute("isFound", true);
         }
         return "login";
     }
+
+    @PostMapping("/login")
+    public String confLogin(@Valid UserLoginBindingModel userLoginBindingModel,
+                            BindingResult bindingResult,
+                            RedirectAttributes redirectAttributes) {
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userLoginBindingModel", bindingResult);
+
+            return "redirect:login";
+        }
+
+        UserServiceModel userServiceModel = userService
+                .findUserByUsernameAndPassword(userLoginBindingModel.getUsername(),
+                        userLoginBindingModel.getPassword());
+        if (userServiceModel == null) {
+            redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
+            redirectAttributes.addFlashAttribute("isFound", false);
+            return "redirect:login";
+        }
+        userService.loginUser(userServiceModel.getId(),
+                userServiceModel.getUsername(), httpSession);
+
+        return "redirect:/";
+    }
+
+
 }
