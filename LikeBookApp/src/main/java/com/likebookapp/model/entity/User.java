@@ -20,9 +20,9 @@ public class User extends BaseEntity{
     private String password;
     @Column(nullable = false,unique = true)
     private String email;
-    @OneToMany
-    private List<Post> posts;
 
-    @ManyToMany
-    private List<Post> likePosts;
+//    @OneToMany
+//    private List<Post> posts;
+//    @ManyToMany
+//    private List<Post> likePosts;
 }

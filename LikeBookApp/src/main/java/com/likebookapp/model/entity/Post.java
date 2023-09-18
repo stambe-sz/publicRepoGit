@@ -17,8 +17,8 @@ public class Post extends BaseEntity {
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
-    @Column
-    private int likes;
+//    @Column
+//    private int likes;
     @ManyToOne
     @NotNull
     private User user;

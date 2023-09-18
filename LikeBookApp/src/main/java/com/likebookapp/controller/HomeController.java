@@ -29,6 +29,7 @@ public class HomeController {
             return "redirect:/";
         }
 
+
         return "home";
     }
 

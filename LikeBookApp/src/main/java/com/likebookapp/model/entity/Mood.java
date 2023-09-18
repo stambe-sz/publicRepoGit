@@ -21,6 +21,4 @@ public class Mood extends BaseEntity{
 
     @Column
     private String description;
-    @OneToMany(mappedBy = "mood")
-    private List<Post> posts;
 }
