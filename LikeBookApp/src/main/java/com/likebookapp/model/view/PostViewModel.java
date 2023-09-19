@@ -25,5 +25,4 @@ public class PostViewModel {
 
     private MoodViewModel mood;
 
-    private Long id;
 }

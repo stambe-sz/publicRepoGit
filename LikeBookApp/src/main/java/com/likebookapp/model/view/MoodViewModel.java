@@ -13,6 +13,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class MoodViewModel extends BaseViewModel {
+    private String name;
     private String description;
-    private List<PostViewModel> posts;
+
 }

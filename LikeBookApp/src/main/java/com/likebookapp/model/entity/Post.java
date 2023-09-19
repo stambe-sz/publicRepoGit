@@ -22,8 +22,8 @@ public class Post extends BaseEntity {
     @ManyToOne
     @NotNull
     private User user;
-    @ManyToMany(mappedBy = "likePosts")
+    @ManyToMany
     private List<User> userLikes;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Mood mood;
 }

@@ -23,7 +23,7 @@ public class MoodService {
         Arrays.stream(MoodNameEnum.values())
                 .forEach(moodNameEnum ->{
                     Mood mood = new Mood();
-                    mood.setMoodName(moodNameEnum);
+                    mood.setName(moodNameEnum.name());
                     mood.setDescription("...");
                     this.moodRepository.save(mood);
                 });

@@ -15,10 +15,12 @@ import java.util.List;
 @Table(name = "moods")
 public class Mood extends BaseEntity{
 
-    @Enumerated(EnumType.STRING)
-    @Column(unique = true,nullable = false)
-    private MoodNameEnum moodName;
+//    @Enumerated(EnumType.STRING)
+//    @Column(unique = true,nullable = false)
+//    private MoodNameEnum moodName;
 
+    @Column
+    private String name;
     @Column
     private String description;
 }
